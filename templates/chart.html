@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 Schools by Student Count</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>Top 10 Schools by Student Count</h2>
+    <canvas id="studentsChart" width="800" height="400"></canvas>
+
+    <script>
+        const labels = {{ labels | tojson | safe }};
+        const values = {{ values | tojson | safe }};
+
+        const ctx = document.getElementById('studentsChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of Students',
+                    data: values,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 100 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
